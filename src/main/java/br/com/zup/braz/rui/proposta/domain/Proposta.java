@@ -42,7 +42,7 @@ public class Proposta {
     public Proposta(){}
 
     public Proposta(@NotBlank String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @Positive BigDecimal salario) {
-        this.documento = documento;
+        this.documento = documento.replaceAll("[^0-9]", "");
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;
