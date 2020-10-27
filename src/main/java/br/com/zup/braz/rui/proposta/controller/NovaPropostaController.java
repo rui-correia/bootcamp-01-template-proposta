@@ -1,5 +1,6 @@
 package br.com.zup.braz.rui.proposta.controller;
 
+import br.com.zup.braz.rui.proposta.configuration.error.ApiErroException;
 import br.com.zup.braz.rui.proposta.domain.Proposta;
 import br.com.zup.braz.rui.proposta.request.NovaPropostaRequest;
 import br.com.zup.braz.rui.proposta.service.PropostaService;
@@ -33,7 +34,8 @@ public class NovaPropostaController {
         Proposta proposta = novaPropostaRequest.toModel();
 
         if (propostaService.existeDocumento(proposta.getDocumento())) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(novaPropostaRequest);
+            throw new ApiErroException(HttpStatus.UNPROCESSABLE_ENTITY, "Já existe uma proposta para este CPF.");
+            //return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(novaPropostaRequest);
         }
         entityManager.persist(proposta);
 
