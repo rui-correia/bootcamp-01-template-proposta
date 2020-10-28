@@ -1,6 +1,7 @@
 package br.com.zup.braz.rui.proposta.request;
 
 import br.com.zup.braz.rui.proposta.annotation.CpfCnpj;
+import br.com.zup.braz.rui.proposta.annotation.DocumentoUnico;
 import br.com.zup.braz.rui.proposta.domain.Proposta;
 import com.sun.istack.NotNull;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 public class NovaPropostaRequest {
 
 
+    @DocumentoUnico(fieldName = "documento", domainClass = Proposta.class)
     @CpfCnpj(fieldName = "documento", domainClass = Proposta.class)
     @NotBlank(message = "Documento deve ser inserido.")
     private String documento;
