@@ -2,6 +2,7 @@ package br.com.zup.braz.rui.proposta.controller;
 
 import br.com.zup.braz.rui.proposta.configuration.error.ApiErroException;
 import br.com.zup.braz.rui.proposta.domain.Proposta;
+import br.com.zup.braz.rui.proposta.feign.AnaliseClient;
 import br.com.zup.braz.rui.proposta.request.NovaPropostaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,16 @@ public class NovaPropostaController {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    AnaliseClient analiseClient;
+
     @PostMapping
     @Transactional
     public ResponseEntity<?> novaProposta(@Valid @RequestBody NovaPropostaRequest novaPropostaRequest, UriComponentsBuilder uriComponentsBuilder) {
         Proposta proposta = novaPropostaRequest.toModel();
 
         entityManager.persist(proposta);
+        analiseClient.analisaProposta(proposta.toAnalise());
 
         return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri()).body(proposta);
     }

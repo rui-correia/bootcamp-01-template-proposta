@@ -1,5 +1,6 @@
 package br.com.zup.braz.rui.proposta.domain;
 
+import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -47,5 +48,9 @@ public class Proposta {
         this.nome = nome;
         this.endereco = endereco;
         this.salario = salario;
+    }
+
+    public AnalisePropostaRequest toAnalise(){
+        return new AnalisePropostaRequest(this.documento, this.nome, this.id);
     }
 }
