@@ -1,5 +1,6 @@
 package br.com.zup.braz.rui.proposta.configuration.error;
 
+import br.com.zup.braz.rui.proposta.exception.ApiErroException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

@@ -7,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @FeignClient(name = "analise", url = "http://localhost:9999")
 public interface AnaliseClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/api/solicitacao")
-    ResponseEntity<AnalisePropostaResponse> analisaProposta(@RequestBody AnalisePropostaRequest analisePropostaRequest);
-
+    @ResponseBody ResponseEntity<AnalisePropostaResponse> analisaProposta(@RequestBody AnalisePropostaRequest analisePropostaRequest);
 }

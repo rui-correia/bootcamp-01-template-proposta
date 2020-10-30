@@ -43,6 +43,14 @@ public class Proposta {
         return documento;
     }
 
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
+    }
+
+    public void setStatusProposta(StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
+    }
+
     @Deprecated
     public Proposta(){}
 

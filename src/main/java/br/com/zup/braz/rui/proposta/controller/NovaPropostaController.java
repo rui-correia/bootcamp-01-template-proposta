@@ -1,11 +1,12 @@
 package br.com.zup.braz.rui.proposta.controller;
 
-import br.com.zup.braz.rui.proposta.configuration.error.ApiErroException;
 import br.com.zup.braz.rui.proposta.domain.Proposta;
+import br.com.zup.braz.rui.proposta.domain.StatusAnalise;
 import br.com.zup.braz.rui.proposta.feign.AnaliseClient;
-import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
 import br.com.zup.braz.rui.proposta.request.NovaPropostaRequest;
 import br.com.zup.braz.rui.proposta.response.AnalisePropostaResponse;
+import br.com.zup.braz.rui.proposta.service.PropostaService;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,22 +26,16 @@ import javax.validation.Valid;
 public class NovaPropostaController {
 
     @Autowired
-    EntityManager entityManager;
+    PropostaService propostaService;
 
     @Autowired
-    AnaliseClient analiseClient;
+    AnaliseClient analiseClient; //1
 
     @PostMapping
-    @Transactional
+    @Transactional                                              //1
     public ResponseEntity<?> novaProposta(@Valid @RequestBody NovaPropostaRequest novaPropostaRequest, UriComponentsBuilder uriComponentsBuilder) {
-        Proposta proposta = novaPropostaRequest.toModel();
-
-        entityManager.persist(proposta);
-        //analiseClient.analisaProposta(proposta.toAnalise());
-        if (analiseClient.analisaProposta(proposta.toAnalise()).getStatusCode().value() == HttpStatus.CREATED.value()){
-            System.out.println("Deu certo uhul");
-        }
-
+        Proposta proposta = novaPropostaRequest.toModel(); //1
+        propostaService.criar(proposta);
         return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri()).body(proposta);
     }
 }

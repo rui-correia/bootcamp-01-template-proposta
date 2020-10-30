@@ -1,4 +1,4 @@
-package br.com.zup.braz.rui.proposta.configuration.error;
+package br.com.zup.braz.rui.proposta.exception;
 
 import org.springframework.http.HttpStatus;
 

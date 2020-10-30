@@ -1,7 +1,7 @@
 package br.com.zup.braz.rui.proposta.validator;
 
 import br.com.zup.braz.rui.proposta.annotation.DocumentoUnico;
-import br.com.zup.braz.rui.proposta.configuration.error.ApiErroException;
+import br.com.zup.braz.rui.proposta.exception.ApiErroException;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 
