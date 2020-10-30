@@ -3,7 +3,9 @@ package br.com.zup.braz.rui.proposta.controller;
 import br.com.zup.braz.rui.proposta.configuration.error.ApiErroException;
 import br.com.zup.braz.rui.proposta.domain.Proposta;
 import br.com.zup.braz.rui.proposta.feign.AnaliseClient;
+import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
 import br.com.zup.braz.rui.proposta.request.NovaPropostaRequest;
+import br.com.zup.braz.rui.proposta.response.AnalisePropostaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,10 @@ public class NovaPropostaController {
         Proposta proposta = novaPropostaRequest.toModel();
 
         entityManager.persist(proposta);
-        analiseClient.analisaProposta(proposta.toAnalise());
+        //analiseClient.analisaProposta(proposta.toAnalise());
+        if (analiseClient.analisaProposta(proposta.toAnalise()).getStatusCode().value() == HttpStatus.CREATED.value()){
+            System.out.println("Deu certo uhul");
+        }
 
         return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri()).body(proposta);
     }

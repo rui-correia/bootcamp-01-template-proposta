@@ -3,10 +3,14 @@ package br.com.zup.braz.rui.proposta.request;
 import br.com.zup.braz.rui.proposta.annotation.CpfCnpj;
 import br.com.zup.braz.rui.proposta.annotation.DocumentoUnico;
 import br.com.zup.braz.rui.proposta.domain.Proposta;
-import com.sun.istack.NotNull;
+import br.com.zup.braz.rui.proposta.domain.StatusProposta;
 
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
@@ -27,6 +31,8 @@ public class NovaPropostaRequest {
     @NotNull
     @Positive(message = "Salário inserido deve ser maior que zero.")
     private BigDecimal salario;
+    @Enumerated(EnumType.STRING)
+    StatusProposta statusProposta;
 
     public String getDocumento() {
         return documento;
@@ -68,8 +74,10 @@ public class NovaPropostaRequest {
         this.salario = salario;
     }
 
+
+
     public Proposta toModel() {
-        return new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario);
+        return new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario, StatusProposta.EM_ANALISE);
     }
 
 }

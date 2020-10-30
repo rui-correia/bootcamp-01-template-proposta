@@ -1,11 +1,12 @@
 package br.com.zup.braz.rui.proposta.domain;
 
 import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
-import com.sun.istack.NotNull;
+import br.com.zup.braz.rui.proposta.response.AnalisePropostaResponse;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
@@ -30,6 +31,9 @@ public class Proposta {
     @NotNull
     @Positive
     private BigDecimal salario;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private StatusProposta statusProposta;
 
     public Long getId() {
         return id;
@@ -42,15 +46,17 @@ public class Proposta {
     @Deprecated
     public Proposta(){}
 
-    public Proposta(@NotBlank String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @Positive BigDecimal salario) {
+    public Proposta(@NotBlank String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @Positive BigDecimal salario, StatusProposta statusProposta) {
         this.documento = documento.replaceAll("[^0-9]", "");
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;
         this.salario = salario;
+        this.statusProposta = statusProposta;
     }
 
     public AnalisePropostaRequest toAnalise(){
         return new AnalisePropostaRequest(this.documento, this.nome, this.id);
     }
+
 }
