@@ -1,7 +1,5 @@
 package br.com.zup.braz.rui.proposta.request;
 
-import br.com.zup.braz.rui.proposta.domain.Proposta;
-
 import javax.validation.constraints.NotBlank;
 
 public class AnalisePropostaRequest {
@@ -12,10 +10,10 @@ public class AnalisePropostaRequest {
     @NotBlank
     public String idProposta;
 
-    public AnalisePropostaRequest(@NotBlank String documento, @NotBlank String nome, @NotBlank Long id) {
+    public AnalisePropostaRequest(@NotBlank String documento, @NotBlank String nome, @NotBlank String id) {
         this.documento = documento;
         this.nome = nome;
-        this.idProposta = id.toString();
+        this.idProposta = id;
     }
 
     public String getDocumento() {

@@ -1,7 +1,8 @@
 package br.com.zup.braz.rui.proposta.domain;
 
 import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
-import br.com.zup.braz.rui.proposta.response.AnalisePropostaResponse;
+import br.com.zup.braz.rui.proposta.request.SolicitaCartaoRequest;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -17,8 +18,9 @@ import java.math.BigDecimal;
 public class Proposta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
     @NotBlank
     private String documento;
     @NotBlank
@@ -35,7 +37,10 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private StatusProposta statusProposta;
 
-    public Long getId() {
+    public Proposta(String s, String s1, String testeUm, String avenida_dos_testes, BigDecimal v) {
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -65,6 +70,10 @@ public class Proposta {
 
     public AnalisePropostaRequest toAnalise(){
         return new AnalisePropostaRequest(this.documento, this.nome, this.id);
+    }
+
+    public SolicitaCartaoRequest toSolicitaCartao(){
+        return new SolicitaCartaoRequest(this.id);
     }
 
 }

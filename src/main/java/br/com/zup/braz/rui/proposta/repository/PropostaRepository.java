@@ -4,8 +4,11 @@ import br.com.zup.braz.rui.proposta.domain.Proposta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PropostaRepository extends JpaRepository<Proposta, Long> {
+import java.util.List;
 
-    Proposta findByDocumento(String documento);
+@Repository
+public interface PropostaRepository extends JpaRepository<Proposta, String> {
+
+    List<Proposta> findAllByStatusProposta(Enum status);
+
 }

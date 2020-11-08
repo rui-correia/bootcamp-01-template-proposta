@@ -13,5 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public interface AnaliseClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/api/solicitacao")
-    @ResponseBody ResponseEntity<AnalisePropostaResponse> analisaProposta(@RequestBody AnalisePropostaRequest analisePropostaRequest);
+    @ResponseBody
+    ResponseEntity<AnalisePropostaResponse> analisaProposta(@RequestBody AnalisePropostaRequest analisePropostaRequest);
 }

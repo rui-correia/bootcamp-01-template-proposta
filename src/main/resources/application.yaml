@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/proposta
+    username: proposta
+    password: admin
+  jpa:
+    database-platform: postgres
+    generate-ddl: true
+
+    properties:
+      hibernate:
+        ddl-auto: update
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+management:
+  endpoint:
+    health:
+      show-details: always
+    web:
+      exposure:
+        include: "*"

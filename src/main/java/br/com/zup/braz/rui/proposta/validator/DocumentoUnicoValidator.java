@@ -28,13 +28,13 @@ public class DocumentoUnicoValidator implements ConstraintValidator<DocumentoUni
 
     @Override
     public boolean isValid(String valor, ConstraintValidatorContext constraintValidatorContext) {
-        if (valor == null) return true;
+        if (valor == null) return true; //1
 
         Query customQuery = entityManager.createQuery("select 1 from " + aClass.getName() + " where " + campo + " = :valor");
         customQuery.setParameter("valor", valor.replaceAll("[^0-9]", ""));
         List<?> resultadoConsulta = customQuery.getResultList();
         Assert.isTrue(resultadoConsulta.size() <= 1, "Ja existe um registro para o campo: " + campo + " = " + valor);
-        if (!resultadoConsulta.isEmpty()) {
+        if (!resultadoConsulta.isEmpty()) { //2
             throw new ApiErroException(HttpStatus.UNPROCESSABLE_ENTITY, "Já existe uma proposta para este documento.");
         }
 
