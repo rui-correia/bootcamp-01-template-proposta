@@ -24,6 +24,12 @@ public class Vencimento {
     private List<Cartao> cartao;
 
 
+    @Deprecated
+    public Vencimento() {
+
+    }
+
+
     public Vencimento(@NotBlank String id, @NotNull @Positive @Max(31) @Min(01) Integer dia, @NotNull LocalDateTime dataDeCriacao) {
         this.id = id;
         this.dia = dia;

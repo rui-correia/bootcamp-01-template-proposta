@@ -11,6 +11,7 @@ public class PropostaResponse {
         this.documento = documento;
     }
 
+
     public String getId() {
         return id;
     }

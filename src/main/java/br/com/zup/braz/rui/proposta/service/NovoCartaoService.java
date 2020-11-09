@@ -35,16 +35,16 @@ public class NovoCartaoService {
 
             logger.info("Iniciando solicitação de cartão.");
             solicitaCartaoResponse = cartoesClient.solicitaCartao(solicitaCartaoRequest.idProposta).getBody();
-            logger.info("Alterando status da proposta para FINALIZADO.");
 
             //TODO gravar cartao no banco
-            Cartao cartao = solicitaCartaoResponse.toModel();
+            Cartao cartao = solicitaCartaoResponse.toModel();//1
             entityManager.persist(cartao);
             logger.info("Gravação do cartão finalizada.");
-            //TODO alterar o status da proposta
+            logger.info("Alterando status da proposta para APROVADO.");
             alterarStatusPropostaCartaoGerado(solicitaCartaoRequest);
         } catch (FeignException e) {//1
-            System.out.println(e.getMessage());
+            logger.error("Ocorreu um erro ao analisar proposta: " + solicitaCartaoRequest.idProposta);
+            logger.error(e.getMessage());
 
         }
 
@@ -53,8 +53,8 @@ public class NovoCartaoService {
 
     @Transactional
     public void alterarStatusPropostaCartaoGerado(SolicitaCartaoRequest solicitaCartaoRequest) {
-        Proposta proposta = entityManager.find(Proposta.class, solicitaCartaoRequest.idProposta);
-        proposta.setStatusProposta(StatusProposta.FINALIZADO);
+        Proposta proposta = entityManager.find(Proposta.class, solicitaCartaoRequest.idProposta);//1
+        proposta.setStatusProposta(StatusProposta.APROVADO);
         entityManager.merge(proposta);
 
     }

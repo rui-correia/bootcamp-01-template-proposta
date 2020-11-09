@@ -29,6 +29,6 @@ public class NovaPropostaController {
         Proposta proposta = novaPropostaRequest.toModel(); //1
         propostaService.criar(proposta);
         PropostaResponse propostaResponse = new PropostaResponse(proposta.getId(), proposta.getDocumento());
-        return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(propostaResponse.getId()).toUri()).body(propostaResponse);
+        return ResponseEntity.created(uriComponentsBuilder.path("/consultaProposta/{id}").buildAndExpand(propostaResponse.getId()).toUri()).body(propostaResponse);
     }
 }

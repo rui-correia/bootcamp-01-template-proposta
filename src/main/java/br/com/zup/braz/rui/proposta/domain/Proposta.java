@@ -2,6 +2,8 @@ package br.com.zup.braz.rui.proposta.domain;
 
 import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
 import br.com.zup.braz.rui.proposta.request.SolicitaCartaoRequest;
+import br.com.zup.braz.rui.proposta.response.ConsultaPropostaResponse;
+import br.com.zup.braz.rui.proposta.response.PropostaResponse;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -36,6 +38,7 @@ public class Proposta {
     @NotNull
     @Enumerated(EnumType.STRING)
     private StatusProposta statusProposta;
+    private String numeroCartao;
 
     public Proposta(String s, String s1, String testeUm, String avenida_dos_testes, BigDecimal v) {
     }
@@ -54,6 +57,10 @@ public class Proposta {
 
     public void setStatusProposta(StatusProposta statusProposta) {
         this.statusProposta = statusProposta;
+    }
+
+    public void setNumeroCartao(String numeroCartao) {
+        this.numeroCartao = numeroCartao;
     }
 
     @Deprecated
@@ -76,4 +83,8 @@ public class Proposta {
         return new SolicitaCartaoRequest(this.id);
     }
 
+    public ConsultaPropostaResponse toConsultaProposta() {
+        return new ConsultaPropostaResponse(this.id, this.documento, this.statusProposta);
+
+    }
 }

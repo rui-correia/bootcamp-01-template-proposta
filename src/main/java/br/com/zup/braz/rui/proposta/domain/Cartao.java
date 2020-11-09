@@ -38,6 +38,11 @@ public class Cartao {
     @NotBlank
     private String idProposta;
 
+    @Deprecated
+    public Cartao() {
+
+    }
+
     public Cartao(@NotBlank String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueio> bloqueios, List<Aviso> avisos, List<Carteira> carteiras, List<Parcela> parcelas, @NotNull BigDecimal limite, @NotBlank boolean renegociacao, @NotBlank Vencimento vencimento, @NotBlank String idProposta) {
         this.id = id;
         this.emitidoEm = emitidoEm;
@@ -52,4 +57,7 @@ public class Cartao {
         this.idProposta = idProposta;
     }
 
+    public String getId() {
+        return id;
+    }
 }
