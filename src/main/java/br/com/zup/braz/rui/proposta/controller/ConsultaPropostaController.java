@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 
@@ -19,7 +21,7 @@ public class ConsultaPropostaController {
     @Autowired
     EntityManager entityManager;
 
-    public final Logger logger = LoggerFactory.getLogger(AssociaCartaoService.class);
+    public final Logger logger = LoggerFactory.getLogger(ConsultaPropostaController.class);
 
     @RequestMapping(path = "consultaProposta", method = RequestMethod.GET)
     public ResponseEntity<ConsultaPropostaResponse> consultaProposta(@RequestParam("idProposta") String idProposta) {//1

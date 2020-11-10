@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 
 public class NovaPropostaRequest {
 
-
     @DocumentoUnico(fieldName = "documento", domainClass = Proposta.class)
     @CpfCnpj(fieldName = "documento", domainClass = Proposta.class)
     @NotBlank(message = "Documento deve ser inserido.")
@@ -73,8 +72,6 @@ public class NovaPropostaRequest {
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
-
-
 
     public Proposta toModel() {
         return new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario, StatusProposta.EM_ANALISE);
