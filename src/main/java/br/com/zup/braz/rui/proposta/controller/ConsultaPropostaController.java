@@ -23,7 +23,7 @@ public class ConsultaPropostaController {
 
     public final Logger logger = LoggerFactory.getLogger(ConsultaPropostaController.class);
 
-    @RequestMapping(path = "consultaProposta", method = RequestMethod.GET)
+    @RequestMapping(path = "/consultaProposta", method = RequestMethod.GET)
     public ResponseEntity<ConsultaPropostaResponse> consultaProposta(@RequestParam("idProposta") String idProposta) {//1
 
         Proposta proposta = entityManager.find(Proposta.class, idProposta);//1

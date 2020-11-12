@@ -15,6 +15,31 @@ spring:
       hibernate:
         ddl-auto: update
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    #OAUTH2
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:18080/auth/realms/nosso-cartao}
+          jwk-set-uri: ${KEYCLOAK_JWKS_URI:http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs}
+#      client:
+#        provider:
+#          keycloak: #KEYCLOAK
+#            authorization-uri: http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/auth
+#            jwk-set-uri: http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs
+#            token-uri: http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/token
+#            user-info-uri: http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/userinfo
+#        registration:
+#          keycloak:
+#            authorization-grant-type: ${KEYCLOAK_GRANT_TYPE:client_credentials}
+#            client-id: ${KEYCLOAK_CLIENT_ID:nosso-cartao-client}
+#            client-secret: ${KEYCLOAC_CLIENT_SECRET:b784bd98-ee74-421e-a1a1-a720f9ef855a}
+#            scope: ${KEYCLOAK_SCOPES:proposal:read}
+#  keycloak:
+#    domain: ${KEYCLOAK_DOMAIN:http://localhost:18080}
+#    realm: ${KEYCLOAK_REALM:nosso-cartao}
+
+    #ACTUATOR
 management:
   endpoint:
     health:
@@ -22,3 +47,5 @@ management:
     web:
       exposure:
         include: "*"
+
+

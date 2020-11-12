@@ -23,7 +23,6 @@ public class NovaBiometriaService {
     @Autowired
     EntityManager entityManager;
 
-
     public boolean verificaCartaoExistente(String idCartao) {
         return cartaoRepository.existsById(idCartao);
     }
