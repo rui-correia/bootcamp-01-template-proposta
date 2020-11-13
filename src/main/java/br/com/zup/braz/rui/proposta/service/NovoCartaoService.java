@@ -36,7 +36,7 @@ public class NovoCartaoService {
             logger.info("Iniciando solicitação de cartão.");
             solicitaCartaoResponse = cartoesClient.solicitaCartao(solicitaCartaoRequest.idProposta).getBody();
 
-            //TODO gravar cartao no banco
+            //gravar cartao no banco
             Cartao cartao = solicitaCartaoResponse.toModel();//1
             entityManager.persist(cartao);
             logger.info("Gravação do cartão finalizada.");

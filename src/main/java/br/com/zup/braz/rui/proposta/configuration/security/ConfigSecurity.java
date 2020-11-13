@@ -8,15 +8,16 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 
-@Configuration//(proxyBeanMethods = false)
+@Configuration
 public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/novaProposta/**").hasAuthority("SCOPE_proposal:write")
                 .antMatchers(HttpMethod.GET, "/consultaProposta").hasAuthority("SCOPE_proposal:read")
+                .antMatchers(HttpMethod.POST, "/novaProposta/**").hasAuthority("SCOPE_proposal:write")
+                .anyRequest().permitAll()
                 .and().csrf().disable()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static br.com.zup.braz.rui.proposta.domain.StatusProposta.*;

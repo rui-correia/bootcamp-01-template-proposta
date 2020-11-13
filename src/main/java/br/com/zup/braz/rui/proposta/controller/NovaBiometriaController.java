@@ -32,7 +32,7 @@ public class NovaBiometriaController {
     public ResponseEntity<?> novaBiometria(@RequestParam("biometria") MultipartFile biometria, UriComponentsBuilder uriComponentsBuilder, @RequestParam("idCartao") String idCartao) {
 
         if (biometria.isEmpty()){
-            logger.info("Biometria nula ou inv'alida.");
+            logger.info("Biometria nula ou inválida.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
