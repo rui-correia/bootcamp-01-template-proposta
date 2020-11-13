@@ -9,7 +9,6 @@ public class DadosImprocessaveisException extends RuntimeException{
     private final String reason;
 
     public DadosImprocessaveisException(HttpStatus httpStatus, String reason){
-        super(reason);
         this.httpStatus = httpStatus;
         this.reason = reason;
     }

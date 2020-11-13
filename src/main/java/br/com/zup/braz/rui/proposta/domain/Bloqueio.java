@@ -1,5 +1,6 @@
 package br.com.zup.braz.rui.proposta.domain;
 
+import br.com.zup.braz.rui.proposta.request.BloqueioRequest;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class Bloqueio {
     @NotBlank
     String userAgent;
     @NotNull
-    Enum<StatusBloqueio> status;
+    @Enumerated(EnumType.STRING)
+    StatusBloqueio status;
 
 
     @Deprecated
@@ -41,5 +43,13 @@ public class Bloqueio {
 
     public String getId() {
         return id;
+    }
+
+    public String getIdCartao() {
+        return idCartao;
+    }
+
+    public void setStatus(StatusBloqueio status) {
+        this.status = status;
     }
 }

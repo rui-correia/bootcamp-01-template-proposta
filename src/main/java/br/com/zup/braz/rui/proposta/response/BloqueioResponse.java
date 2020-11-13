@@ -4,6 +4,10 @@ public class BloqueioResponse {
 
     String id;
 
+    @Deprecated
+    public BloqueioResponse() {
+    }
+
     public BloqueioResponse(String id) {
         this.id = id;
     }

@@ -1,18 +1,14 @@
 package br.com.zup.braz.rui.proposta.scheduler;
 
 import br.com.zup.braz.rui.proposta.domain.Bloqueio;
-import br.com.zup.braz.rui.proposta.domain.StatusBloqueio;
-import br.com.zup.braz.rui.proposta.repository.BloqueioRepository;
-import ch.qos.logback.core.db.dialect.HSQLDBDialect;
-import org.hibernate.engine.jdbc.spi.SqlStatementLogger;
+import br.com.zup.braz.rui.proposta.service.BloqueioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
-
-import static br.com.zup.braz.rui.proposta.domain.StatusBloqueio.SOLICITADO;
 
 @Configuration
 @EnableScheduling
@@ -20,24 +16,17 @@ import static br.com.zup.braz.rui.proposta.domain.StatusBloqueio.SOLICITADO;
 public class BloquearCartao {
 
     @Autowired
-    BloqueioRepository bloqueioRepository;
+    BloqueioService bloqueioService;
 
+    @Scheduled(fixedRate = 15000)
     void bloquearCartao() {
-
-        List<Bloqueio> bloqueios = buscarSolicitacoesDeBloqueio();
+        List<Bloqueio> bloqueios = bloqueioService.buscarSolicitacoesDeBloqueio();
         if (!bloqueios.isEmpty()) {
             for (Bloqueio bloqueio : bloqueios) {
-
+                bloqueioService.bloquearCartao(bloqueio);
             }
         }
 
-    }
-
-
-    private List<Bloqueio> buscarSolicitacoesDeBloqueio() {
-        List<Bloqueio> cartoesASeremBloqueados = (List<Bloqueio>) bloqueioRepository.findAllByStatus(SOLICITADO);
-
-        return cartoesASeremBloqueados;
     }
 
 }
