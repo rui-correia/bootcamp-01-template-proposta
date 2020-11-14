@@ -19,7 +19,7 @@ import javax.persistence.EntityManager;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/novaBiometria")
+@RequestMapping("/nova_biometria")
 public class NovaBiometriaController {
 
     @Autowired

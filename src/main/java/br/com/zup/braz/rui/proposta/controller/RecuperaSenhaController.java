@@ -20,7 +20,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping(value = "/recuperaSenha")
+@RequestMapping(value = "/recupera_senha")
 public class RecuperaSenhaController {
 
     @Autowired

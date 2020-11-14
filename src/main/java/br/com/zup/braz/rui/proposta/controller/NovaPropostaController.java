@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping(value = "/novaProposta")
+@RequestMapping(value = "/nova_proposta")
 public class NovaPropostaController {
 
     @Autowired

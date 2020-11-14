@@ -22,7 +22,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/bloquearCartao")
+@RequestMapping("/bloquear_cartao")
 public class BloqueiaCartaoController {
 
     @Autowired

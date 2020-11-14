@@ -4,13 +4,9 @@ import br.com.zup.braz.rui.proposta.domain.Bloqueio;
 import br.com.zup.braz.rui.proposta.feign.CartoesClient;
 import br.com.zup.braz.rui.proposta.repository.BloqueioRepository;
 import br.com.zup.braz.rui.proposta.request.BloqueioRequest;
-import br.com.zup.braz.rui.proposta.response.BloquearCartaoResponse;
-import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +55,7 @@ public class BloqueioService {
                 bloqueio.setStatus(BLOQUEADO);
                 bloqueioRepository.save(bloqueio);
                 logger.info("Cartão bloqueado com sucesso.");
-            }else {
+            }else {//1
                 return;
             }
 

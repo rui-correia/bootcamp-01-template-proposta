@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface BloqueioRepository extends JpaRepository<Bloqueio, String> {
+
     Optional<Bloqueio> findByIdCartaoAndStatusIn(String idCartao, List<Enum> status);
 
     List<Bloqueio> findAllByStatus(Enum<StatusBloqueio> status);

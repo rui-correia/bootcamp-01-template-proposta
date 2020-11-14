@@ -18,7 +18,7 @@ public class SolicitaCartaoResponse {
     @NotBlank
     private String titular;
     private List<Bloqueio> bloqueios;
-    private List<Aviso> avisos;
+    private List<AvisoViagem> avisos;
     private List<Carteira> carteiras;
     private List<Parcela> parcelas;
     @NotNull
@@ -30,7 +30,7 @@ public class SolicitaCartaoResponse {
     @NotBlank
     private String idProposta;
 
-    public SolicitaCartaoResponse(@NotBlank String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueio> bloqueios, List<Aviso> avisos, List<Carteira> carteiras, List<Parcela> parcelas, @NotNull BigDecimal limite, boolean renegociacao, @NotBlank Vencimento vencimento, @NotBlank String idProposta) {
+    public SolicitaCartaoResponse(@NotBlank String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueio> bloqueios, List<AvisoViagem> avisos, List<Carteira> carteiras, List<Parcela> parcelas, @NotNull BigDecimal limite, boolean renegociacao, @NotBlank Vencimento vencimento, @NotBlank String idProposta) {
         this.id = id;
         this.emitidoEm = emitidoEm;
         this.titular = titular;
@@ -76,11 +76,11 @@ public class SolicitaCartaoResponse {
         this.bloqueios = bloqueios;
     }
 
-    public List<Aviso> getAvisos() {
+    public List<AvisoViagem> getAvisos() {
         return avisos;
     }
 
-    public void setAvisos(List<Aviso> avisos) {
+    public void setAvisos(List<AvisoViagem> avisos) {
         this.avisos = avisos;
     }
 

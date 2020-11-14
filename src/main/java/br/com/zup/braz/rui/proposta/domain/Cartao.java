@@ -14,7 +14,8 @@ import java.util.List;
 public class Cartao {
 
     @Id
-    @NotBlank
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
     @NotNull
     private LocalDateTime emitidoEm;
@@ -43,7 +44,7 @@ public class Cartao {
 
     }
 
-    public Cartao(@NotBlank String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueio> bloqueios, List<Aviso> avisos, List<Carteira> carteiras, List<Parcela> parcelas, @NotNull BigDecimal limite, @NotBlank boolean renegociacao, @NotBlank Vencimento vencimento, @NotBlank String idProposta) {
+    public Cartao(@NotBlank String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueio> bloqueios, List<AvisoViagem> avisos, List<Carteira> carteiras, List<Parcela> parcelas, @NotNull BigDecimal limite, @NotBlank boolean renegociacao, @NotBlank Vencimento vencimento, @NotBlank String idProposta) {
         this.id = id;
         this.emitidoEm = emitidoEm;
         this.titular = titular;
