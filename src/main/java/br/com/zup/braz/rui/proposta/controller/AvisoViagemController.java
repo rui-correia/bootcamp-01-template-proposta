@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -29,7 +30,7 @@ public class AvisoViagemController {
 
     @PostMapping(value = "/{idCartao}")
     @Transactional
-    public ResponseEntity<?> avisarViagem(@PathVariable String idCartao, @RequestBody AvisoViagemRequest avisoViagemRequest, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> avisarViagem(@PathVariable String idCartao, @RequestBody @Valid AvisoViagemRequest avisoViagemRequest, UriComponentsBuilder uriComponentsBuilder) {
 
         if (!cartaoService.verificaCartaoExistente(idCartao)) {//1
             return ResponseEntity.notFound().build();

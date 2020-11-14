@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "t_cartao")
@@ -23,8 +24,9 @@ public class Cartao {
     private String titular;
     //@OneToMany(mappedBy = "t_cartao")
     //private List<Bloqueio> bloqueios;
-    //@OneToMany(mappedBy = "t_cartao")
-    //private List<Aviso> avisos;
+    @OneToMany
+    @JoinColumn
+    private Set<AvisoViagem> avisos;
     //@OneToMany(mappedBy = "t_cartao")
     //private List<Carteira> carteiras;
     //@OneToMany(mappedBy = "t_cartao")

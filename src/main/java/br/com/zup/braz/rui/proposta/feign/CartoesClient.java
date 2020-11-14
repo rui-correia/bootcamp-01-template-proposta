@@ -1,6 +1,7 @@
 package br.com.zup.braz.rui.proposta.feign;
 
 import br.com.zup.braz.rui.proposta.request.BloqueioRequest;
+import br.com.zup.braz.rui.proposta.request.CarteiraRequest;
 import br.com.zup.braz.rui.proposta.response.SolicitaCartaoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -16,4 +17,7 @@ public interface CartoesClient {
 
     @PostMapping(value = "api/cartoes/{idCartao}/bloqueios")
     ResponseEntity bloquearCartao(@PathVariable String idCartao, @RequestBody BloqueioRequest bloqueioRequest);
+
+    @PostMapping(value = "api/cartoes/{idCartao}/carteiras")
+    ResponseEntity novaCarteira(@PathVariable String idCartao, @RequestBody CarteiraRequest carteiraRequest);
 }
