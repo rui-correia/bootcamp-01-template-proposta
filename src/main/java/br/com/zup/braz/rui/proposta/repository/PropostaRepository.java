@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PropostaRepository extends JpaRepository<Proposta, String> {
@@ -13,4 +14,6 @@ public interface PropostaRepository extends JpaRepository<Proposta, String> {
     List<Proposta> findAllByStatusProposta(Enum status);
 
     List<Proposta> findAllByStatusPropostaIn(List<Enum> status);
+
+    Optional<Proposta> findByDocumento(String documento);
 }

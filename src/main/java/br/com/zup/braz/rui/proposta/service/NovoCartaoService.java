@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Service
 public class NovoCartaoService {
@@ -23,7 +24,7 @@ public class NovoCartaoService {
     @Autowired
     CartoesClient cartoesClient;//1
 
-    @Autowired
+    @PersistenceContext
     EntityManager entityManager;
 
     @Transactional
@@ -38,7 +39,7 @@ public class NovoCartaoService {
 
             //gravar cartao no banco
             Cartao cartao = solicitaCartaoResponse.toModel();//1
-            entityManager.persist(cartao);
+            entityManager.merge(cartao);
             logger.info("Gravação do cartão finalizada.");
             logger.info("Alterando status da proposta para APROVADO.");
             alterarStatusPropostaCartaoGerado(solicitaCartaoRequest);

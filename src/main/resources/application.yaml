@@ -1,10 +1,15 @@
+variable:
+  postgres: localhost
+  jaeger: localhost
+  keycloak: localhost
+
 server:
   port: 8081
 
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/proposta
+    url: jdbc:postgresql://${variable.postgres}:5433/proposta
     username: proposta
     password: admin
   jpa:
@@ -20,17 +25,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:18080/auth/realms/nosso-cartao}
-          jwk-set-uri: ${KEYCLOAK_JWKS_URI:http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs}
-
-    #ACTUATOR
-#management:
-#  endpoint:
-#    health:
-#      show-details: always
-#    web:
-#      exposure:
-#        include: "*"
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://${variable.keycloak}:18080/auth/realms/nosso-cartao}
+          jwk-set-uri: ${KEYCLOAK_JWKS_URI:http://${variable.keycloak}:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs}
 
 management:
   endpoints:
@@ -43,3 +39,20 @@ management:
     tags:
       aplicacao: ${NOME_DA_APLICACAO:propostaApp}
       ambiente: ${AMBIENTE:desenvolvimento}
+
+opentracing:
+  spring:
+    cloud:
+      jdbc:
+        enabled: false
+  jaeger:
+    enabled: ${JAEGER_ENABLED:true}
+    service-name: proposta
+    http-sender:
+      url: ${JAEGER_ENDPOINT:http://${variable.jaeger}:14268/api/traces}
+    probabilistic-sampler:
+      sampling-rate: ${JAEGER_SAMPLER:1}
+
+#Token da criptografia
+token:
+  criptografia: ${TOKEN_CRIPTOGRAFIA:46070D4BF934FB0D4B06D9E2C46E346944E322444900A435D7D9A95E6D7435F5}

@@ -5,10 +5,13 @@ import br.com.zup.braz.rui.proposta.domain.StatusProposta;
 import br.com.zup.braz.rui.proposta.exception.DadosImprocessaveisException;
 import br.com.zup.braz.rui.proposta.feign.AnaliseClient;
 import br.com.zup.braz.rui.proposta.repository.PropostaRepository;
+import br.com.zup.braz.rui.proposta.request.NovaPropostaRequest;
 import br.com.zup.braz.rui.proposta.response.AnalisePropostaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PropostaService {
@@ -25,6 +28,14 @@ public class PropostaService {
         return propostaCriada;
     }
 
+    public boolean documentoExistente(NovaPropostaRequest novaPropostaRequest){
+        Optional<Proposta> proposta = propostaRepository.findByDocumento(Proposta.criptografarDocumento(novaPropostaRequest.getDocumento()));
+        if (proposta.isPresent()){
+            return true;
+        }
+        return false;
+    }
+
     public void analisaProposta(Proposta proposta) {
         //4
         AnalisePropostaResponse analisePropostaResponse = null;
@@ -38,4 +49,5 @@ public class PropostaService {
         }
         propostaRepository.save(proposta);
     }
+
 }

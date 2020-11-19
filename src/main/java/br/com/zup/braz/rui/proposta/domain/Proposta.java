@@ -1,10 +1,12 @@
 package br.com.zup.braz.rui.proposta.domain;
 
+import br.com.zup.braz.rui.proposta.configuration.security.Criptografia;
 import br.com.zup.braz.rui.proposta.request.AnalisePropostaRequest;
 import br.com.zup.braz.rui.proposta.request.SolicitaCartaoRequest;
 import br.com.zup.braz.rui.proposta.response.ConsultaPropostaResponse;
-import br.com.zup.braz.rui.proposta.response.PropostaResponse;
+
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,7 +14,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-
 
 
 @Entity
@@ -51,6 +52,10 @@ public class Proposta {
         return documento;
     }
 
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
     public StatusProposta getStatusProposta() {
         return statusProposta;
     }
@@ -64,7 +69,8 @@ public class Proposta {
     }
 
     @Deprecated
-    public Proposta(){}
+    public Proposta() {
+    }
 
     public Proposta(@NotBlank String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco, @Positive BigDecimal salario, StatusProposta statusProposta) {
         this.documento = documento.replaceAll("[^0-9]", "");
@@ -75,16 +81,21 @@ public class Proposta {
         this.statusProposta = statusProposta;
     }
 
-    public AnalisePropostaRequest toAnalise(){
+    public AnalisePropostaRequest toAnalise() {
         return new AnalisePropostaRequest(this.documento, this.nome, this.id);
     }
 
-    public SolicitaCartaoRequest toSolicitaCartao(){
+    public SolicitaCartaoRequest toSolicitaCartao() {
         return new SolicitaCartaoRequest(this.id);
     }
 
     public ConsultaPropostaResponse toConsultaProposta() {
         return new ConsultaPropostaResponse(this.id, this.documento, this.statusProposta);
 
+    }
+
+    public static String criptografarDocumento(String documento) {
+        Assert.notNull(documento, "Documento não pode ser nulo.");
+        return Criptografia.encriptar(documento);
     }
 }
